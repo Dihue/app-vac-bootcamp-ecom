@@ -24,4 +24,16 @@ def pagina_pacientes(request):
 
 
 def login(request):
+    # Recuperación de datos mediante el método GET
+    """ print("======================")
+    print("PARAMETROS GET --> ", request.GET)
+    username = request.GET.get("username", default=None)
+    password = request.GET.get("password", default=None) """
+    
+    username = request.POST.get("username", default=None)
+    password = request.POST.get("password", default=None)
+
+    print("Username:", username)
+    print("Password:", password)
+
     return render(request,'login.html', {})
