@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'inicio' %}">Volver al inicio</a>
+    <a href="{% url 'lista_de_usuarios' %}">Lista de Usuarios</a>
+    <a href="{% url 'lista_de_pacientes' %}">Lista de Pacientes</a>
+    <a href="{% url 'login' %}">Iniciar sesion</a>
+
+    {% block contenido  %}
+    {% endblock contenido %}
+</body>
+</html>
