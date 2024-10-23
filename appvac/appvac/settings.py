@@ -75,6 +75,15 @@ WSGI_APPLICATION = 'appvac.wsgi.application'
 
 DATABASES = {
     'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'app_vac',
+            'USER': 'postgres',
+            'PASSWORD': 'didahue21',
+            'HOST': 'localhost',
+            'POST': '5432',
+    },
+
+    'otra_db': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }

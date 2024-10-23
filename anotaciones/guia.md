@@ -53,3 +53,26 @@
 
 9.  Cambiar la configuración de los **TEMPLATES** en el archivo
     settings.py para definir de dónde debe tomar los archivos .html
+
+10. Para usar una base de datos externa, como ser Postgres, es necesario
+    instalar una nueva dependencia con el siguiente comando:
+
+    > pip install psycopg2
+
+    Cada DB tiene su dependencia correspondiente (si existe)
+
+11. Modificar la configuración del **settings.py** para realizar la
+    conexión con la nueva base de datos. Se puede conectar a más de una
+    base de datos (como para uso de sólo lectura de datos). Ejemplo
+    para Postgres:
+
+    > DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'nombre_db',
+            'USER': 'postgres',
+            'PASSWORD': 'password_db',
+            'HOST': 'localhost',
+            'POST': 'puerto_db',
+        }
+    }
