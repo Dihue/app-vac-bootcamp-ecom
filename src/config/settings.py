@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 # Nuevo modelo para el manejo de usuarios
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
+# Al cerrar sesión
+LOGIN_URL = reverse_lazy('login')
+
 # Indicar la redirección del template al iniciar sesión
 LOGIN_REDIRECT_URL = reverse_lazy('inicio')
 

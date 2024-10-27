@@ -27,6 +27,7 @@ urlpatterns = [
     # path('login/', views.login, name='login'),
     # *Uso de libreria django y vista basada en clase
     path('login/', views_django.LoginView.as_view(template_name="login.html"), name='login'),
+    path('logout/', views_django.logout_then_login, name="logout"),
 
     path('usuarios/lista/', views.pagina_usuarios, name='lista_de_usuarios'),
     path('pacientes/lista', views.pagina_pacientes, name='lista_de_pacientes')

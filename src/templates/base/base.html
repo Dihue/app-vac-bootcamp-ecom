@@ -6,10 +6,18 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
-    <a href="{% url 'lista_de_usuarios' %}">Lista de Usuarios</a>
-    <a href="{% url 'lista_de_pacientes' %}">Lista de Pacientes</a>
-    <a href="{% url 'login' %}">Iniciar sesion</a>
+    <a href="{% url 'inicio' %}">| Volver al inicio |</a>
+    <a href="{% url 'lista_de_usuarios' %}">| Lista de Usuarios |</a>
+    <a href="{% url 'lista_de_pacientes' %}">| Lista de Pacientes |</a>
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">{% csrf_token %}
+            <p><button type="submit">Cerrar sesión</button></p>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">| Iniciar sesión |</a>
+    {% endif %}
+    
 
     {% block contenido  %}
     {% endblock contenido %}
