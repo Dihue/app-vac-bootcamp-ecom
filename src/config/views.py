@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from django.contrib.auth import authenticate, login as login_django
 
 
 def mi_pagina_inicio(request):
@@ -25,15 +27,37 @@ def pagina_pacientes(request):
 
 def login(request):
     # Recuperación de datos mediante el método GET
-    """ print("======================")
+    """
     print("PARAMETROS GET --> ", request.GET)
     username = request.GET.get("username", default=None)
-    password = request.GET.get("password", default=None) """
+    password = request.GET.get("password", default=None)
+    """
+    # Variables de control
+    se_autentico = False
+    algo_salio_mal = True
+    username = ""
+
+    # Recuperación de datos mediante el método POST
+    if request.method == "POST":
+        username = request.POST.get("username", default=None)
+        password = request.POST.get("password", default=None)
+
+        # Permite identificar si el usuario está en la DB
+        usuario = authenticate(request, username=username, password=password)
+        se_autentico = True
+
+        # Verificación del login del usuario
+        if usuario:
+            algo_salio_mal = False
+            login_django(request, usuario)
+            return redirect("inicio")
+        else:
+            print("|---> Autenticación MAL")
     
-    username = request.POST.get("username", default=None)
-    password = request.POST.get("password", default=None)
+    ctx = {
+        "se_autentico": se_autentico,
+        "algo_salio_mal": algo_salio_mal,
+        "username": username
+    }
 
-    print("Username:", username)
-    print("Password:", password)
-
-    return render(request,'login.html', {})
+    return render(request,'login.html', ctx)

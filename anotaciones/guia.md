@@ -76,3 +76,23 @@
             'POST': 'puerto_db',
         }
     }
+
+12. Creación de aplicaciones usando el comando (dentro de la carpeta
+    seleccionada):
+
+    > django-admin startapp {nombre_de_la_app}
+
+    Como recomendación, se crea una carpeta **apps** para almacenar
+    todas las apps del proyecto.
+
+13. Luego de la creación de una APP, se debe realizar cambios en el
+    **settings.py** para poder usar esa app. La modificación se hace
+    en la parte de **INSTALLED.APP**
+
+    Ejemplo: 'apps.usuarios'
+
+14. En el caso de "usuarios" y por estar contenida en una carpeta,
+    se debe modificar en el archivo **apps.py**, que está dentro de
+    la aplicación, el atributo **name** que pasa a llamarse:
+
+    > name = 'apps.usuarios'
