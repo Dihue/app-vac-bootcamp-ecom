@@ -5,6 +5,7 @@
 #https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +39,9 @@ INSTALLED_APPS = [
 
 # Nuevo modelo para el manejo de usuarios
 AUTH_USER_MODEL = 'usuarios.Usuario'
+
+# Indicar la redirección del template al iniciar sesión
+LOGIN_REDIRECT_URL = reverse_lazy('inicio')
 
 
 MIDDLEWARE = [
