@@ -1,16 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
-from .forms import FormUsuario
+from .forms import FormUsuario, FormUser
 from .models import Usuario
 
 # Create your views here.
 def nuevo(request):
     template_name = 'usuarios/nuevo.html'
-    form = FormUsuario()
+    # form = FormUsuario()
+    form = FormUser()
 
     # Acceder al POST e inicializar con esos datos
     if request.method == 'POST':
-        form = FormUsuario(request.POST)
+        # form = FormUsuario(request.POST)
+        form = FormUser(request.POST)
 
         if form.is_valid():
             form.save()
@@ -27,8 +29,8 @@ def nuevo(request):
 
 def pagina_usuarios(request):
     # Trae a todos los objetos de la tabla Usuario de la DB
-    usuarios = Usuario.objects.all() # filter(id__in=[1,2,3])
-
+    usuarios = Usuario.objects.all()
+    
     # Trae solo a los objetos, que coinciden con los valores
     # del filter de la tabla Usuario de la DB
     # usuarios = Usuario.objects.filter(id__in=[1,2,3])
