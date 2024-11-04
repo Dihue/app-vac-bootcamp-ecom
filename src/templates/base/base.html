@@ -1,23 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <a href="{% url 'inicio' %}">| Volver al inicio |</a>
-    <a href="{% url 'usuarios:lista' %}">| Lista de Usuarios |</a>
-    <a href="{% url 'lista_de_pacientes' %}">| Lista de Pacientes |</a>
+    <div class="navbar">
+        <a href="{% url 'inicio' %}">Volver al inicio</a>
+        <a href="{% url 'usuarios:lista' %}">Lista de Usuarios</a>
+        <a href="{% url 'lista_de_pacientes' %}">Lista de Pacientes</a>
 
-    {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}" method="post">{% csrf_token %}
-            <p><button type="submit">Cerrar sesión</button></p>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}">| Iniciar sesión |</a>
-    {% endif %}
-    
+        <div class="session-buttons">
+            {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">{% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
+        </div>
+        
+    </div>
 
     {% block contenido  %}
     {% endblock contenido %}
