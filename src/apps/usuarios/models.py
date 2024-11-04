@@ -8,4 +8,4 @@ class Usuario(AbstractUser):
 
     # Redefinición del método string
     def __str__(self):
-        return f"ID:{self.id} - Username:{self.username} - {self.first_name}"
+        return f"ID: {self.id} - Username: {self.username} - {self.first_name}"
