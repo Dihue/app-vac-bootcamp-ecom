@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 
 from .models import Usuario
 
@@ -31,3 +32,12 @@ class FormUser(UserCreationForm):
             "is_active",
             "dni"
         ]
+    
+    def clean_dni(self):
+        dni = self.cleaned_data["dni"]
+
+        if not ( 1 <= len(str(dni)) <= 8 ):
+            raise ValidationError("DNI debe tener entre 7 y 8 dígitos")
+        print(dni.__class__.__name__)
+
+        return dni

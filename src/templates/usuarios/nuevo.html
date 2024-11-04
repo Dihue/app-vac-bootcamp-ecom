@@ -3,10 +3,12 @@
 {% block contenido  %}
 <h2>Nuevo usuario</h2>
 
+{{message}}
+<hr>
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Guardar</button>
     <a href="{% url 'usuarios:lista' %}">Volver</a>
 </form>
-
+<hr>
 {% endblock contenido %}
