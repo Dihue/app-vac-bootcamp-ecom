@@ -12,7 +12,7 @@
     <div class="navbar">
         <a href="{% url 'inicio' %}">Volver al inicio</a>
         <a href="{% url 'usuarios:lista' %}">Lista de Usuarios</a>
-        <a href="{% url 'lista_de_pacientes' %}">Lista de Pacientes</a>
+        <a href="{% url 'pacientes:lista' %}">Lista de Pacientes</a>
 
         <div class="session-buttons">
             {% if user.is_authenticated %}

@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block contenido  %}
+
+<h2>LISTA DE PACIENTES</h2>
+<a href="{% url 'pacientes:nuevo' %}">Nuevo paciente</a>
+<table>
+    <tr>
+        <th>| Nombre</th>
+        <th>| Apellido</th>
+        <th>| DNI</th>
+    </tr>
+
+    {% for p in pacientes %}
+        <tr>
+            <td>
+                {% if p.nombre %}
+                    | {{ p.nombre }}
+                {% else %}
+                    | -
+                {% endif %}
+            </td>
+            <td>| {{ p.apellido|default:" -" }}</td>
+            <td>| {{ p.dni|default:" -" }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock contenido %}
