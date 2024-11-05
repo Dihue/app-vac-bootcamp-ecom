@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
@@ -22,6 +23,19 @@ class FormUsuario(forms.ModelForm):
 
 # Hereda de un formulario que ya viene con Django
 class FormUser(UserCreationForm):
+    # Para crear un campo nuevo y personalizado
+    # Hasta aquí no se mapea por lo que no se guardará
+    # atributo1 = forms.CharField()
+
+    # Para poder redefinir el tipo de campo y sus propiedades
+    # username = forms.CharField(label="Usuario", widget=forms.TextInput(attrs={'class':'form-control'}))
+    username = forms.CharField(
+        label="Nombre de usuario",
+        widget=forms.TextInput(
+            attrs={'placeholder':'Ingrese un nombre de usuario'}
+        )
+    )
+
     class Meta:
         model = Usuario
         fields = [
@@ -32,7 +46,28 @@ class FormUser(UserCreationForm):
             "is_active",
             "dni"
         ]
-    
+
+
+    def __init__(self, *args, **kwargs):
+        super(FormUser, self).__init__(*args, **kwargs)
+
+        add_class_form_control = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "dni",
+            "password1",
+            "password2"
+            ]
+        
+        for attr_field in add_class_form_control:
+            self.fields[attr_field].widget.attrs["class"] = "form-control"
+        
+        self.fields["first_name"].widget.attrs["placeholder"] = "Ingrese su nombre"
+        self.fields["last_name"].widget.attrs["placeholder"] = "Ingrese su apellido"
+
+
     def clean_dni(self):
         dni = self.cleaned_data["dni"]
 

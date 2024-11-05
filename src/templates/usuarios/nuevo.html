@@ -3,10 +3,24 @@
 {% block contenido  %}
 <h2>Nuevo usuario</h2>
 
-<form method="post">{% csrf_token %}
-    <!-- {{message}} -->
+<form method="post" class="p-4 border rounded bg-light">{% csrf_token %}
+    {{ form.errors }}
+
+    {% include 'includes/forms.html' with form=formUsuario %}
+    
+    <button type="submit">Guardar</button>
+    <a href="{% url 'usuarios:lista' %}">Volver</a>
+</form>
+
+<!-- <form method="post">{% csrf_token %}
+    {{message}}
     {{ form.errors}}
     <hr>
+    
+    <p>
+        {{ form.atributo1.label }}
+        {{ form.atributo1 }}
+    </p>
     <p>
         {{ form.username.label }}
         {{ form.username }}
@@ -35,11 +49,10 @@
     <p>
         {{ form.password2.label }}
         {{ form.password2 }}
-        <!-- {{ form.password2.help_text }} -->
+        {{ form.password2.help_text }}
     </p>
-    <!-- {{ form.as_p }} -->
+    {{ form.as_p }}
     <button type="submit">Guardar</button>
     <a href="{% url 'usuarios:lista' %}">Volver</a>
-</form>
-<hr>
+</form> -->
 {% endblock contenido %}
