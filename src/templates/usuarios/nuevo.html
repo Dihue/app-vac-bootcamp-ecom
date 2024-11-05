@@ -1,16 +1,20 @@
 {% extends 'base/base.html' %}
 
 {% block contenido  %}
-<h2>Nuevo usuario</h2>
+<div class="container">
+    <div class="form-container mt-5">
+        <h2>Nuevo usuario</h2>
 
-<form method="post" class="p-4 border rounded bg-light">{% csrf_token %}
-    {{ form.errors }}
-
-    {% include 'includes/forms.html' with form=formUsuario %}
-    
-    <button type="submit">Guardar</button>
-    <a href="{% url 'usuarios:lista' %}">Volver</a>
-</form>
+        <form method="post" class="p-4 border rounded bg-light">{% csrf_token %}
+            {{ form.errors }}
+        
+            {% include 'includes/forms.html' with form=formUsuario %}
+            
+            <button type="submit">Guardar</button>
+            <a href="{% url 'usuarios:lista' %}">Volver</a>
+        </form>
+    </div>
+</div>
 
 <!-- <form method="post">{% csrf_token %}
     {{message}}
