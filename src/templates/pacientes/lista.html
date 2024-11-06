@@ -9,19 +9,17 @@
         <th>| Nombre</th>
         <th>| Apellido</th>
         <th>| DNI</th>
+        <th>| Género</th>
+        <th>| Fecha de nacimiento</th>
     </tr>
 
     {% for p in pacientes %}
         <tr>
-            <td>
-                {% if p.nombre %}
-                    | {{ p.nombre }}
-                {% else %}
-                    | -
-                {% endif %}
-            </td>
+            <td>| {{ p.nombre|default:" -" }}</td>
             <td>| {{ p.apellido|default:" -" }}</td>
             <td>| {{ p.dni|default:" -" }}</td>
+            <td>| {{ p.genero|default:" -" }}</td>
+            <td>| {{ p.fecha_nacimiento|default:" -" }}</td>
         </tr>
     {% endfor %}
 </table>

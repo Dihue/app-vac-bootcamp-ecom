@@ -3,12 +3,12 @@
 {% block contenido  %}
 <div class="container">
     <div class="form-container mt-5">
-        <h2>Nuevo paciente</h2>
+        <h2> {{ titulo }} </h2>
 
         <form method="post" class="p-4 border rounded bg-light">{% csrf_token %}
-            {% include 'includes/forms_error.html' with form=formPaciente %}
-        
-            {% include 'includes/forms.html' with form=formPaciente %}
+            
+            {% include 'includes/forms_error.html' %}
+            {% include 'includes/forms.html' %}
             
             <button type="submit">Guardar</button>
             <a href="{% url 'pacientes:lista' %}">Volver</a>

@@ -1,46 +1,37 @@
-from django.shortcuts import redirect, render
+from django.db.models.query import QuerySet
+from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+from django.urls import reverse_lazy
 
 from .forms import FormPaciente
 from .models import Paciente
 
-# Create your views here.
-def nuevo(request):
+
+class Nuevo(CreateView):
     template_name = 'pacientes/nuevo.html'
-    form = FormPaciente()
-    message = ""
+    model = Paciente
+    form_class = FormPaciente
+    success_url = reverse_lazy("pacientes:lista")
 
-    # Acceder al POST e inicializar con esos datos
-    if request.method == 'POST':
-        form = FormPaciente(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect("pacientes:lista")
-        else:
-            message = "No se guardó de forma correcta el formulario"
-
-    ctx = {
-        "formPaciente": form,
-        "message": message
-    }
-    return render(request,template_name, ctx)
+    # Función que viene dentro del CreateView y que se la puede personalizar
+    def get_context_data(self, **kwargs):
+        ctx = super(Nuevo, self).get_context_data(**kwargs)
+        ctx["titulo"] = "Nuevo paciente"
+        return ctx
 
 
-def lista(request):
-    # Trae a todos los pacientes de la tabla Pacientes de la DB
-    pacientes = Paciente.objects.all()
+class Lista(ListView):
+    template_name = 'pacientes/lista.html'
+    model = Paciente
+    context_object_name = "pacientes"
+    paginate_by = 2
 
-    # Para solo traer al primer objeto de toda la lista de "pacientes"
-    p = Paciente.objects.filter(id=1).first()
+    def get_queryset(self):
+        query = self.model.objects.all()
+        nombre = self.request.GET.get('nombre', None)
 
-    print("|--> TODOS LOS PACIENTES")
-    if p is None:
-        print("No existe usuario")
-    else:
-        print(p)
-        print(p.nombre)
-
-    ctx = {
-        "pacientes": pacientes
-    }
-    return render(request,'pacientes/lista.html', ctx)
+        if nombre:
+            query = query.filter(nombre= nombre)
+        
+        return query.order_by("apellido")
