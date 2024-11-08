@@ -10,3 +10,7 @@ Sistema de gestión para la vacunación, desarrollada en el bootcamp de python d
 + Login / logout
 + Dashboards
 + Turnos
+
+
+### Python
+- Versión 3.12.4
