@@ -12,8 +12,8 @@ GENERO_CHOICES = (
 
 # Create your models here.
 class Paciente(models.Model):
-    nombre = models.CharField()
-    apellido = models.CharField()
+    nombre = models.CharField(max_length=20)
+    apellido = models.CharField(max_length=20)
     dni = models.IntegerField()
     fecha_nacimiento = models.DateField()
-    genero = models.CharField(choices=GENERO_CHOICES)
+    genero = models.CharField(choices=GENERO_CHOICES, max_length=10)

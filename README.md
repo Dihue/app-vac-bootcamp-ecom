@@ -11,6 +11,10 @@ Sistema de gestión para la vacunación, desarrollada en el bootcamp de python d
 + Dashboards
 + Turnos
 
+### Despliegue
+1. Crear entorno virtual
+2. Instalar dependencias del requirements/base.txt
+3. Crear un archivo ".env" con los datos y estructuras del "env_example"
 
 ### Python
 - Versión 3.12.4

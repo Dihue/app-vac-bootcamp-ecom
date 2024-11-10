@@ -4,6 +4,8 @@
 # For the full list of settings and their values, see
 #https://docs.djangoproject.com/en/5.1/ref/settings/
 
+import environ
+import os
 from pathlib import Path
 from django.urls import reverse_lazy
 
@@ -11,17 +13,33 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#! Apartado de configuración con variables de entorno
+env = environ.Env()
+env_file = os.path.join(os.path.dirname(BASE_DIR), ".env")
+
+env.read_env(env_file=env_file, overwrite=True)
+
+SECRET_KEY_DEFAULT = 'django-insecure-&4k$qc+4-gyqux%*u-%44_%)!n@(6okioin^02u=34gjkl+8(5'
+SECRET_KEY = env("SECRET_KEY", default=SECRET_KEY_DEFAULT)
+
+DEBUG = env.bool("DJANGO_DEBUG", default=True)
+
+ENVIRONMENT_RUN = env("ENVIRONMENT_RUN", default="local")
+
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=['*'])
+#! Fin apartado
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&4k$qc+4-gyqux%*u-%44_%)!n@(6okioin^02u=34gjkl+8(5'
+# SECRET_KEY = 'django-insecure-&4k$qc+4-gyqux%*u-%44_%)!n@(6okioin^02u=34gjkl+8(5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,16 +100,35 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DEFAULT_DB_NAME = env("POSTGRES_DB")
+DEFAULT_DB_USER = env("POSTGRES_USER")
+DEFAULT_DB_HOST = env("POSTGRES_HOTS")
+DEFAULT_DB_PORT = env("POSTGRES_PORT")
+
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'app_vac',
-            'USER': 'postgres',
-            'PASSWORD': 'didahue21',
-            'HOST': 'localhost',
-            'POST': '5432',
+            'NAME': DEFAULT_DB_NAME,
+            'USER': DEFAULT_DB_USER,
+            'PASSWORD': env("POSTGRES_PASSWORD"),
+            'HOST': DEFAULT_DB_HOST,
+            'POST': DEFAULT_DB_PORT,
+            # Para uso en face de TEST
+            'ATOMIC_REQUESTS': True,
+            'CONN_MAX_AGE': env.int("CONN_MAX_AGE", default=60)
     }
 }
+
+# DATABASES = {
+#     'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'app_vac',
+#             'USER': 'postgres',
+#             'PASSWORD': '',
+#             'HOST': 'localhost',
+#             'POST': '5432',
+#     }
+# }
 
 
 # Password validation
