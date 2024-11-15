@@ -1,10 +1,20 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth import authenticate, login as login_django
+from django.views.generic import TemplateView
+
+
+class BaseTemplateView(TemplateView):
+    template_name = "blank.html"
 
 
 def mi_pagina_inicio(request):
-    return render(request,'mi_pagina_inicio.html', {})
+
+    ctx = {
+        "TITULO": "INICIO"
+    }
+
+    return render(request,'mi_pagina_inicio.html', ctx)
 
 
 def login(request):

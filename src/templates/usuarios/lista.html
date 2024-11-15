@@ -1,29 +1,31 @@
-{% extends 'base/base.html' %}
+{% extends 'base/new_base.html' %}
 
-{% block contenido  %}
+{% block content %}
+    <div class="container">
+        <div class="form-container mt-5">
+            <h2>LISTA DE USUARIOS</h2>
+            <a href="{% url 'usuarios:nuevo' %}">Nuevo usuario</a>
+            <table>
+                <tr>
+                    <th>| Username </th>
+                    <th>| Nombre</th>
+                    <th>| Apellido</th>
+                </tr>
 
-<h2>LISTA DE USUARIOS</h2>
-<a href="{% url 'usuarios:nuevo' %}">Nuevo usuario</a>
-<table>
-    <tr>
-        <th>| Username </th>
-        <th>| Nombre</th>
-        <th>| Apellido</th>
-    </tr>
-
-    {% for us in usuarios %}
-        <tr>
-            <td>| {{ us.username }}</td>
-            <td>
-                {% if us.first_name %}
-                    | {{ us.first_name }}
-                {% else %}
-                    | -
-                {% endif %}
-            </td>
-            <td>| {{ us.last_name|default:" -" }}</td>
-        </tr>
-    {% endfor %}
-</table>
-
-{% endblock contenido %}
+                {% for us in usuarios %}
+                    <tr>
+                        <td>| {{ us.username }}</td>
+                        <td>
+                            {% if us.first_name %}
+                                | {{ us.first_name }}
+                            {% else %}
+                                | -
+                            {% endif %}
+                        </td>
+                        <td>| {{ us.last_name|default:" -" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}

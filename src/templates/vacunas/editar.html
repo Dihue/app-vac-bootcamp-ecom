@@ -1,13 +1,16 @@
-{% extends "base/base.html" %}
+{% extends "base/new_base.html" %}
 
-{% block contenido %}
-    <h1>{{titulo}}</h1>
+{% block content %}
+    <div class="container">
+        <div class="form-container mt-5">
+            <h1>{{titulo}}</h1>
 
-    <form method="post">{% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit">Guardar cambios</button>
-    </form>
+            <form method="post">{% csrf_token %}
+                {{ form.as_p}}
+                <button type="submit">Guardar cambios</button>
+            </form>
 
-    <a href="{% url 'vacunas:lista' %}">Volver a la lista</a>
-
-{% endblock contenido %}
+            <a href="{% url 'vacunas:lista' %}">Volver a la lista</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,71 +1,91 @@
-{% extends "base/base.html" %}
+{% extends "base/new_base.html" %}
 
-{% block block_title %}Vacunas{% endblock block_title %}
+{% block title_block %}
+        Vacunas
+{% endblock title_block %}
 
+{% block css_extras %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock css_extras %}
 
-{% block contenido %}
-	
-	<div class="row">
-		<div class="col-xl-12">
-			<div class="card">
-                <div class="card-header">
-                    <h5><i class="fas fa-vial"></i> {{titulo}}</h5>
+{% block content %}
+    <main class="app-main">
+        <div class="app-content-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">{{ titulo }}</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item">
+								<a href="{% url 'inicio' %}">Home</a>
+							</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ titulo }}
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-                <div class="card-block table-border-style">
-                    <!-- <div class="row">
-						<div class="col-xl-12">
-                            <div class="btn-group right">
-							<a href=""><button type="button" class="btn btn-primary" title="" data-toggle="tooltip" data-original-title="Nueva Metadata"><i class="fas fa-plus"></i> Nuevo Centro de Vacunación</button></a>
-							</div>
-						</div>
-					</div> -->
-					<br>
-					<div class="row">
-						<div class="col-xl-12">
-							<form method="GET">
-								<div class="input-group">
-									<input id="search" type="text" class="form-control" name="search" value="{{search}}" placeholder="Búsqueda por nombre de Usuarios" value="{{search}}">
-									<span class="input-group-btn">
-                                        <button type="submit" class="btn btn-primary m-0"><i class="fas fa-search prefix"></i> Buscar</button>
-                                    </span>
-								</div>
-							</form>
-						</div>
-					</div>
-					<br>
-					<div class="table-responsive">
-						<table class="table table-columned">
-							<thead>
-								<tr>
-									<th>Código</th>
-									<th>Nombre</th>
-									<th>Cantidad de dosis</th>
-									<th>opciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for vacuna in vacunas %}
-									<tr id="rowTurno_{{turno.id}}">
-										<th>{{vacuna.codigo}}</th>
-										<td>{{vacuna.nombre|default:'-'}}</td>
-										<td>{{vacuna.cant_dosis}}</td>
-										<td>
-											<a href="{% url 'vacunas:nuevo' %}">Agregar</a>
-											<a href="{% url 'vacunas:editar' vacuna.id %}">Editar</a>
-											<a href="{% url 'vacunas:eliminar' vacuna.id %}">Eliminar</a>
-										</td>
-									</tr>
-								{% empty %}
-									<tr>
-										<td>No se encontraron resultados</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
+            </div>
+        </div>
 
-						{% include "includes/paginacion.html" %}
-				</div>
-			</div>
-		</div>
-	</div>
-{% endblock contenido %}
+        <div class="app-content">
+			<div class="container-fluid">
+				<div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-6">
+                            <div class="card-header">
+                                <h3 class="card-title">Vacunas Registradas</h3>
+								<div class="card-tools">
+                                    <a href="{% url 'vacunas:nuevo' %}" class="btn btn-primary"><i class="fas fa-plus"></i>Nuevo</a>
+                                </div>
+                            </div>
+
+							<div class="card-body">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th style="width: 20px">Código</th>
+											<th>Nombre</th>
+											<th style="width: 20px">Cantidad de dosis</th>
+											<th style="width: 150px">Opciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for vacuna in vacunas %}
+											<tr class="align-middle" id="rowTurno_{{turno.id}}">
+												<td  class="text-center">{{vacuna.codigo}}</td>
+												<td>{{vacuna.nombre|default:'-'}}</td>
+												<td  class="text-center">{{vacuna.cant_dosis}}</td>
+												<td  class="text-center">
+													<a href="{% url 'vacunas:detalle' vacuna.id %}" class="btn btn-sm btn-info" title="Detalle">
+														<i class="fas fa-eye"></i>
+													</a>
+													<a href="{% url 'vacunas:editar' vacuna.id %}" class="btn btn-sm btn-warning" title="Editar">
+														<i class="fas fa-edit"></i>
+													</a>
+													<a href="{% url 'vacunas:eliminar' vacuna.id %}" class="btn btn-sm btn-danger" title="Eliminar">
+														<i class="fas fa-trash-alt"></i>
+													</a>
+												</td>
+											</tr>
+										{% empty %}
+											<tr>
+												<td colspan="4" class="text-center">No se encontraron resultados</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+                            </div>
+                                
+							<div class="card-body d-flex justify-content-center">
+                                {% include "includes/paginacion.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>	
+        </div>
+    </main>
+{% endblock content %}

@@ -1,21 +1,24 @@
-{% extends "base/base.html" %}
+{% extends "base/new_base.html" %}
 
-{% block contenido %}
-    <h2>{{ vacuna.nombre }}</h2>
+{% block content %}
+<div class="container">
+    <div class="form-container mt-5">
+        <h2>{{ vacuna.nombre }}</h2>
 
-    <p>Código: {{ vacuna.codigo }}</p>
-    <p>Dosis requeridas: {{ vacuna.cant_dosis }}</p>
+        <p>Código: {{ vacuna.codigo }}</p>
+        <p>Dosis requeridas: {{ vacuna.cant_dosis }}</p>
 
-    <h3>Dosis asociadas</h3>
+        <h3>Dosis asociadas</h3>
 
-    <ul>
-        {% for dosis in dosis  %}
-            <li> {{ dosis.nombre }} (Orden: {{ dosis.orden}})</li>
-        {% empty %}
-            <li>No hay dosis asociadas para esta vacuna</li>
-        {% endfor %}
-    </ul>
+        <ul>
+            {% for dosis in dosis  %}
+                <li> {{ dosis.nombre }} (Orden: {{ dosis.orden}})</li>
+            {% empty %}
+                <li>No hay dosis asociadas para esta vacuna</li>
+            {% endfor %}
+        </ul>
 
-    <a href="{% url 'vacunas:lista' %}">Volver a la lista de vacunas</a>
-
-{% endblock contenido %}
+        <a href="{% url 'vacunas:lista' %}">Volver a la lista de vacunas</a>
+    </div>
+</div>
+{% endblock content %}

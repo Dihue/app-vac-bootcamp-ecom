@@ -1,6 +1,7 @@
 {% extends 'base/new_base.html' %}
 
-{% block content  %}
+{% block content %}
+
     <main class="app-main">
 
         <div class="app-content-header">
@@ -8,14 +9,12 @@
                 <div class="row">
                     
                     <div class="col-sm-6">
-                        <h3 class="mb-0">{{ TITULO }}</h3>
+                        <h3 class="mb-0">{ TITULO }</h3>
                     </div>
                     
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item">
-                                <a href="{% url 'inicio' %}">Home</a>
-                            </li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
                                 { SUBTITULO }
                             </li>
@@ -28,11 +27,9 @@
         
         <div class="app-content">
             <div class="container-fluid">
-                {% if user.is_authenticated %}
-                    <h3>Bienvenido {{ user }}</h3>
-                {% endif %}
+                {nuestro contenido}
             </div>
         </div>
-        
     </main>
+
 {% endblock content %}
