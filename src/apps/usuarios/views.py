@@ -57,6 +57,7 @@ def pagina_usuarios(request):
         print(us.last_login)
     '''
     ctx = {
-        "usuarios": usuarios
+        "usuarios": usuarios,
+        "titulo": "Usuarios"
     }
     return render(request,'usuarios/lista.html', ctx)

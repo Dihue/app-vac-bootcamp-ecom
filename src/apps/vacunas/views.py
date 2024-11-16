@@ -10,7 +10,7 @@ class Listar(ListView):
     template_name = 'vacunas/lista.html'
     model = Vacuna
     context_object_name = 'vacunas'
-    paginate_by = 5
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         ctx = super(Listar, self).get_context_data(**kwargs)
