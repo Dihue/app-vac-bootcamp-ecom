@@ -12,7 +12,7 @@ urlpatterns = [
     # Editar una Vacuna
     path('vacuna/<int:pk>/editar/', views.VacunaUpdate.as_view(), name='editar'),
     # Detalle Vacuna
-    path('vacuna/<int:pk>/', views.VacunaDetail.as_view(), name='detalle'),
+    path('vacuna/<int:id_vacuna>/', views.VacunaDetail.as_view(), name='detalle'),
     # Eliminar Vacuna
     path('vacuna/<int:pk>/eliminar', views.VacunaDeleteView.as_view(), name='eliminar')
     # Búsqueda Vacuna

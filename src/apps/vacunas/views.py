@@ -46,6 +46,8 @@ class VacunaDetail(DetailView):
     model = Vacuna
     template_name = 'vacunas/detalle.html'
     context_object_name = 'vacuna'
+    # Cambiar el pk por otro campo que se necesite usar
+    pk_url_kwarg = "id_vacuna"
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
