@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Vacuna(models.Model):
-    codigo = models.IntegerField()
+    codigo = models.IntegerField(unique=True)
     nombre = models.CharField(max_length=50)
     cant_dosis = models.IntegerField(default=1)
 

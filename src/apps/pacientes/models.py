@@ -17,3 +17,6 @@ class Paciente(models.Model):
     dni = models.IntegerField()
     fecha_nacimiento = models.DateField()
     genero = models.CharField(choices=GENERO_CHOICES, max_length=10)
+
+    def __str__(self):
+        return f"{self.apellido}, {self.nombre}"
