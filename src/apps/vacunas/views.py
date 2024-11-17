@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -6,7 +7,7 @@ from django.urls import reverse_lazy
 from .models import Vacuna, Dosis
 from .forms import FormVacuna
 
-class Listar(ListView):
+class Listar(LoginRequiredMixin, ListView):
     template_name = 'vacunas/lista.html'
     model = Vacuna
     context_object_name = 'vacunas'
