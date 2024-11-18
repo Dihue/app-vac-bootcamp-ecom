@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
-
 from django.contrib.auth import authenticate, login as login_django
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+
+from apps.util.decorators import verificar_permisos
 
 
 class BaseTemplateView(TemplateView):
     template_name = "blank.html"
 
 
+#@verificar_permisos()
 def mi_pagina_inicio(request):
 
     ctx = {
@@ -53,3 +55,10 @@ def login(request):
     }
 
     return render(request,'login.html', ctx)
+
+
+def pagina_error_permisos(request):
+    template_name = 'decoradores/error_permisos.html'
+    ctx = {}
+
+    return render(request, template_name, ctx)
