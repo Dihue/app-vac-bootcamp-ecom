@@ -1,0 +1,6 @@
+apellido y nombre,fecha,nombre vacuna,dosis
+Alles, Virginia,2024-11-17,Aztrazeneka,1ra Dosis
+De Cuadra, Dihue,2024-11-17,Aztrazeneka,2da Dosis
+Cruz, Claudio,2024-11-17,Aztrazeneka,Refuerzo
+De Cuadra, Dihue,2024-11-17,Aztrazeneka,1ra Dosis
+De Cuadra, Dihue,2024-11-17,Aztrazeneka,Refuerzo
