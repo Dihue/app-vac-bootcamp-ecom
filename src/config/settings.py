@@ -61,7 +61,9 @@ LOCAL_APPS = [
     'apps.carnet',
 ]
 
-THIRD_APPS = []
+THIRD_APPS = [
+    'rest_framework',
+]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_APPS
 
