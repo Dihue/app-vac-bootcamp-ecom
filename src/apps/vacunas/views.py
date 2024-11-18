@@ -4,14 +4,18 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
+from django_filters.views import FilterView
+
 from .models import Vacuna, Dosis
 from .forms import FormVacuna
+from .filters import VacunaFiltro
 
-class Listar(LoginRequiredMixin, ListView):
+class Listar(LoginRequiredMixin, FilterView):
     template_name = 'vacunas/lista.html'
     model = Vacuna
     context_object_name = 'vacunas'
-    paginate_by = 2
+    paginate_by = 3
+    filterset_class = VacunaFiltro
 
     def get_context_data(self, **kwargs):
         ctx = super(Listar, self).get_context_data(**kwargs)
